@@ -1,0 +1,25 @@
+--replace_regex /varchar\([0-9]+\)/varchar(pathlen)/
+SHOW CREATE TABLE information_schema.DISK_SIZE_INFO;
+
+SELECT COUNT(*) > 0 AS has_rows,
+       MIN(FREE_SIZE <= TOTAL_SIZE) AS valid_sizes
+  FROM information_schema.DISK_SIZE_INFO;
+
+SELECT COUNT(*) >= 1 AS has_datadir
+  FROM information_schema.DISK_SIZE_INFO
+ WHERE JSON_CONTAINS(RELATED_VARIABLES, '"datadir"');
+
+SELECT COUNT(*) AS obsolete_variable
+  FROM information_schema.DISK_SIZE_INFO
+ WHERE JSON_CONTAINS(RELATED_VARIABLES, '"innodb_tmpdir"');
+
+SELECT COUNT(*) AS duplicate_directories
+  FROM (
+    SELECT DIR_NAME
+      FROM information_schema.DISK_SIZE_INFO
+     GROUP BY DIR_NAME
+    HAVING COUNT(*) > 1
+  ) AS duplicates;
+
+SELECT MIN(JSON_VALID(RELATED_VARIABLES)) AS valid_variable_arrays
+  FROM information_schema.DISK_SIZE_INFO;

@@ -1,0 +1,36 @@
+SHOW CREATE TABLE information_schema.DISK_SIZE_INFO;
+Table	Create Table
+DISK_SIZE_INFO	CREATE TEMPORARY TABLE `DISK_SIZE_INFO` (
+  `DIR_NAME` varchar(pathlen) NOT NULL,
+  `RELATED_VARIABLES` varchar(pathlen) NOT NULL,
+  `FREE_SIZE` bigint(21) unsigned NOT NULL,
+  `TOTAL_SIZE` bigint(21) unsigned NOT NULL
+) ENGINE=MEMORY DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci
+SELECT COUNT(*) > 0 AS has_rows,
+MIN(FREE_SIZE <= TOTAL_SIZE) AS valid_sizes
+FROM information_schema.DISK_SIZE_INFO;
+has_rows	valid_sizes
+1	1
+SELECT COUNT(*) >= 1 AS has_datadir
+FROM information_schema.DISK_SIZE_INFO
+WHERE JSON_CONTAINS(RELATED_VARIABLES, '"datadir"');
+has_datadir
+1
+SELECT COUNT(*) AS obsolete_variable
+FROM information_schema.DISK_SIZE_INFO
+WHERE JSON_CONTAINS(RELATED_VARIABLES, '"innodb_tmpdir"');
+obsolete_variable
+0
+SELECT COUNT(*) AS duplicate_directories
+FROM (
+SELECT DIR_NAME
+FROM information_schema.DISK_SIZE_INFO
+GROUP BY DIR_NAME
+HAVING COUNT(*) > 1
+) AS duplicates;
+duplicate_directories
+0
+SELECT MIN(JSON_VALID(RELATED_VARIABLES)) AS valid_variable_arrays
+FROM information_schema.DISK_SIZE_INFO;
+valid_variable_arrays
+1
