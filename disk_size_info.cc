@@ -361,7 +361,7 @@ maria_declare_plugin(disk_size_info)
   0x0100,
   nullptr,
   nullptr,
-  "1.0",
-  MariaDB_PLUGIN_MATURITY_EXPERIMENTAL
+  "0.2.0",
+  MariaDB_PLUGIN_MATURITY_BETA
 }
 maria_declare_plugin_end;
