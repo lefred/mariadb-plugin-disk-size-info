@@ -352,16 +352,16 @@ maria_declare_plugin(disk_size_info)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
   &disk_size_info_descriptor,
-  "DISK_SIZE_INFO",
-  "lefred (Frédéric Descamps)",
-  "Disk capacity for MariaDB server directories",
-  PLUGIN_LICENSE_GPL,
+  NAME,
+  PLUGIN_AUTHOR,
+  PLUGIN_DESCRIPTION,
+  PLUGIN_LICENSE,
   disk_size_info_init,
   nullptr,
-  0x0100,
+  PLUGIN_HEX_VERSION,
   nullptr,
   nullptr,
-  "0.2.0",
+  PLUGIN_VERSION,
   MariaDB_PLUGIN_MATURITY_BETA
 }
 maria_declare_plugin_end;
