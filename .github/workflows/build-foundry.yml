@@ -19,5 +19,5 @@ jobs:
     with:
        mariadb_versions: 74647
        test_suites: disk_size_info
-       #extra_packages_deb: 
-       #extra_packages_rpm: 
+       extra_packages_deb: libcurl-dev
+       extra_packages_rpm: libcurl-devel 
