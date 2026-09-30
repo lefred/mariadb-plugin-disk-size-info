@@ -352,7 +352,7 @@ maria_declare_plugin(disk_size_info)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
   &disk_size_info_descriptor,
-  NAME,
+  "disk_size_info",
   PLUGIN_AUTHOR,
   PLUGIN_DESCRIPTION,
   PLUGIN_LICENSE,
