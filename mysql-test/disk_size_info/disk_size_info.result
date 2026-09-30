@@ -1,6 +1,6 @@
 SHOW CREATE TABLE information_schema.DISK_SIZE_INFO;
 Table	Create Table
-disk_size_info CREATE TEMPORARY TABLE `disk_size_info` (
+disk_size_info	CREATE TEMPORARY TABLE `disk_size_info` (
   `DIR_NAME` varchar(pathlen) NOT NULL,
   `RELATED_VARIABLES` varchar(pathlen) NOT NULL,
   `FREE_SIZE` bigint(21) unsigned NOT NULL,
