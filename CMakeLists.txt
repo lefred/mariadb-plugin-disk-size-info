@@ -7,11 +7,11 @@
 
 cmake_minimum_required(VERSION 3.12)
 
-project(type_email)
+project(disk_size_info)
 
 set(PLUGIN_AUTHOR "lefred")
 set(PLUGIN_VERSION "0.2.2")
-set(PLUGIN_DESCRIPTION "Disk Size Info")
+set(PLUGIN_DESCRIPTION "Disk capacity info for MariaDB Server directories")
 
 set(TYPE_PLUGIN_SOURCES
     disk_size_info.cc
@@ -39,7 +39,7 @@ elseif(COMMAND MYSQL_ADD_PLUGIN)
         VERSION "${PLUGIN_VERSION}"
     )
 
-    target_compile_definitions(type_email PRIVATE
+    target_compile_definitions(disk_size_info PRIVATE
         PLUGIN_AUTHOR="${PLUGIN_AUTHOR}"
         PLUGIN_DESCRIPTION="${PLUGIN_DESCRIPTION}"
     )
